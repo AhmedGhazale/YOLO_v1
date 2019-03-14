@@ -37,8 +37,8 @@ class_scale=1
 obj_scale=1
 grid_size=8
 boxes_per_cell=2
+learning_rate=0.0001
 
-
-
+drop_out_rate=.5
 
 
