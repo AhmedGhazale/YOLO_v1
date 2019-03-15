@@ -31,10 +31,10 @@ classes_map={"aeroplane": 1,
 
 
 #yolo parameters
-coord_scale=5
+coord_scale=5.0
 noobj_scale=.5
-class_scale=1
-obj_scale=1
+class_scale=1.0
+obj_scale=1.0
 grid_size=8
 boxes_per_cell=2
 learning_rate=0.0001
