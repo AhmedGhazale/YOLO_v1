@@ -181,8 +181,8 @@ class YOLO:
         out_boxes_loss = tf.stack([
             out_boxes[..., 0],
             out_boxes[..., 1],
-            tf.sqrt(prid_boxes[..., 2]),
-            tf.sqrt(prid_boxes[..., 3])
+            tf.sqrt(out_boxes[..., 2]),
+            tf.sqrt(out_boxes[..., 3])
         ], axis=-1)
 
         # booxes loss

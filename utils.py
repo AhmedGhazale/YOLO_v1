@@ -56,8 +56,8 @@ def read_label(xml_path, img_size=cfg.image_size, grid_size=cfg.grid_size):
 
         box_size = img_size / grid_size
 
-        cellX = x // box_size
-        cellY = y // box_size
+        cellX = int( x / box_size)
+        cellY = int( y / box_size)
 
         x %= box_size
         y %= box_size

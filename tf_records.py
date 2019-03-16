@@ -41,20 +41,21 @@ def create_data_record(out_filename, images_addrs, labels_addrs):
     writer.close()
     sys.stdout.flush()
 
-def create_tfrecords(name):
+def create_tfrecords(output):
 
     names=[]#names of the data example
     for line in open("names.txt",'r'):
         names.append(line[0:-1])
 
-        images_addresses=[]
-        labels_addresses=[]
 
-        for name in names:
-            images_addresses.append(cfg.images_path+"\\"+name+".jpg")
-            labels_addresses.append(cfg.labels_path + "\\" + name + ".xml")
+    images_addresses=[]
+    labels_addresses=[]
 
-        create_data_record(name+'.tfrecords', images_addresses, labels_addresses)
+    for name in names:
+        images_addresses.append(cfg.images_path+"\\"+name+".jpg")
+        labels_addresses.append(cfg.labels_path + "\\" + name + ".xml")
+
+    create_data_record(output+'.tfrecords', images_addresses, labels_addresses)
 
 
 def parser(record):
@@ -76,7 +77,7 @@ def parser(record):
 
 def read_dataset(dataset_name, batch_size=cfg.batch_size, repeat=None, shuflle=True):
     dataset = tf.data.TFRecordDataset(filenames=[dataset_name], num_parallel_reads=batch_size)
-    dataset = dataset.repeat(repeat).map(parser).shuffle(shuflle).prefetch(2)
+    dataset = dataset.repeat(repeat).map(parser).shuffle(shuflle).batch(batch_size=batch_size).prefetch(2)
 
     #return the dataset in a tf.data.Dataset object
     return dataset
